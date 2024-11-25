@@ -1,9 +1,12 @@
 package br.com.criandoapi.projeto.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,4 +40,10 @@ public class UserController {
         return updatedUser;
     }
 
+    @DeleteMapping("/{id}")
+    public Optional<User> deleteUser(@PathVariable Integer id) {
+        Optional<User> user = dao.findById(id);
+        dao.deleteById(id);
+        return user;
+    }
 }
